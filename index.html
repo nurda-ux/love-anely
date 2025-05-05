@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A love letter with beautiful animations" />
+  <title>Жаным менын куным 💖</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital@0;1&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Playfair Display', serif;
+      color: white;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow-x: hidden;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .stars {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: transparent url('https://raw.githubusercontent.com/JulianLaval/canvas-particle-network/master/img/stars.png') repeat top center;
+      animation: moveStars 200s linear infinite;
+      opacity: 0.8;
+    }
+
+    @keyframes moveStars {
+      from { background-position: 0 0; }
+      to { background-position: -10000px 5000px; }
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 3rem;
+      text-align: center;
+      animation: fadeIn 2s ease-in;
+      backdrop-filter: blur(5px);
+      background: rgba(27, 39, 53, 0.3);
+      border-radius: 30px;
+      margin: 2rem;
+      box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      margin-bottom: 2rem;
+      text-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
+      background: linear-gradient(45deg, #ff69b4, #ff1493);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: glow 3s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 15px rgba(255, 255, 255, 0.6); }
+      50% { text-shadow: 0 0 30px rgba(255, 105, 180, 0.8); }
+    }
+
+    p {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      max-width: 800px;
+      margin: 1.5rem auto;
+      line-height: 1.8;
+      opacity: 0;
+      animation: slideIn 1s ease-out forwards;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      font-style: italic;
+    }
+
+    p:nth-child(2) { animation-delay: 0.7s; }
+    p:nth-child(3) { animation-delay: 1.4s; }
+
+    @keyframes slideIn {
+      from { 
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .photos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      padding: 0 1rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .photos img {
+      width: 100%;
+      height: 350px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      opacity: 0;
+      animation: fadeIn 1s ease-out forwards;
+      animation-delay: calc(var(--photo-index) * 0.3s);
+      filter: brightness(0.9);
+    }
+
+    .photos img:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+      filter: brightness(1.1);
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: linear-gradient(45deg, #ff69b4, #ff1493);
+      transform: rotate(45deg);
+      animation: float 10s linear infinite;
+      filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.5));
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: inherit;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        padding: 2rem 1rem;
+        margin: 1rem;
+      }
+      
+      .photos {
+        gap: 1rem;
+      }
+
+      h1 {
+        margin-bottom: 1.5rem;
+      }
+    }
+
+    /* Music Player Styles */
+    .music-player {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 2;
+      background: linear-gradient(45deg, #ff69b4, #ff1493);
+      padding: 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+    }
+
+    .music-player:hover {
+      transform: scale(1.1) rotate(10deg);
+      box-shadow: 0 8px 25px rgba(255, 105, 180, 0.5);
+    }
+
+    .music-player.playing {
+      animation: pulse 2s infinite, rotate 3s linear infinite;
+    }
+
+    .music-icon {
+      font-size: 28px;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.5); }
+      50% { box-shadow: 0 0 40px rgba(255, 105, 180, 0.8); }
+      100% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.5); }
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+  <div class="hearts"></div>
+
+  <div class="content">
+    <h1>Жаным менын куным 💖</h1>
+    <p>Жаным, я тебя очень сильно люблю. Да, знаю, у нас не всегда всё гладко. Тебе тяжело, я сам по себе сложный человек. Но только ты умеешь понимать и любить меня по-настоящему, несмотря на все мои ошибки.</p>
+    <p>Ты — самое дорогое, что у меня есть. Каждый момент с тобой — это как магия. Ты моя поддержка, моя вселенная, моя душа. Спасибо, что ты рядом… всегда.</p>
+    <div class="photos">
+      <img src="img/img1.jpg" alt="Наше особенное фото" loading="lazy">
+      <img src="img/img2.jpg" alt="Счастливые моменты вместе" loading="lazy">
+      <img src="img/img3.jpg" alt="Наши воспоминания" loading="lazy">
+    </div>
+  </div>
+
+  <div class="music-player" onclick="toggleMusic()">
+    <span class="music-icon">🎵</span>
+  </div>
+  <audio id="bgMusic" src="bakr-zelenye-glaza.mp3" loop></audio>
+
+  <script>
+    // Hearts animation
+    function createHearts() {
+      const heartsContainer = document.querySelector('.hearts');
+      const numberOfHearts = 20;
+
+      for (let i = 0; i < numberOfHearts; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.style.left = `${Math.random() * 100}vw`;
+        heart.style.animationDuration = `${Math.random() * 5 + 5}s`;
+        heart.style.animationDelay = `${Math.random() * 5}s`;
+        heartsContainer.appendChild(heart);
+      }
+    }
+
+    // Set photo animation delays
+    function setPhotoAnimations() {
+      const photos = document.querySelectorAll('.photos img');
+      photos.forEach((photo, index) => {
+        photo.style.setProperty('--photo-index', index + 1);
+      });
+    }
+
+    // Music controls
+    function toggleMusic() {
+      const audio = document.getElementById('bgMusic');
+      const musicPlayer = document.querySelector('.music-player');
+      
+      if (audio.paused) {
+        audio.play();
+        musicPlayer.classList.add('playing');
+      } else {
+        audio.pause();
+        musicPlayer.classList.remove('playing');
+      }
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      createHearts();
+      setPhotoAnimations();
+      
+      // Recreate hearts periodically
+      setInterval(() => {
+        const hearts = document.querySelector('.hearts');
+        hearts.innerHTML = '';
+        createHearts();
+      }, 20000);
+
+      // Handle image loading errors
+      const images = document.querySelectorAll('img');
+      images.forEach(img => {
+        img.onerror = () => {
+          img.src = 'https://via.placeholder.com/300x300?text=Photo+Not+Found';
+        };
+      });
+
+      // Setup music
+      const audio = document.getElementById('bgMusic');
+      audio.volume = 0.5; // Set initial volume to 50%
+    });
+  </script>
+</body>
+</html>
